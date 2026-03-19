@@ -1,8 +1,11 @@
-import type models = require("./models");
+
+
+import type { Task, Priority } from "./models";
 
 function createTask(title: string, description: string, priority: "low" | "medium" | "high") {
+    const id = Math.random().toString(36).substring(2);
     return {
-        id: orcrandomID(),
+        id: (),
         title,
         description,
         priority: "high",
@@ -25,13 +28,14 @@ export function filterByPriority(
     return tasks.filter(task => task.priority === priority);
 }
 
-export function getstats(tasks: Task[]): {
+export function getstats(tasks: Task[]): {number, completed: number, pending: number} {
     const completed = tasks.filter(task => task.completed).length;
 
     return {
         total: tasks.length,
         completed,
         pending: tasks.length - completed,
-};
+    };
+}
 
 

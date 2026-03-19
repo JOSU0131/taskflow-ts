@@ -1,5 +1,6 @@
 
-import { Task } from "./models";
+
+import type { Task, CreateTaskInput } from "./models";
 
 const exampleTask: Task = {
   id: "1",
@@ -10,13 +11,12 @@ const exampleTask: Task = {
         createdAt: new Date()
 };
 
-import { CreateTaskInput } from "./models";
-
-function createTask(input: CreateTaskInput): {
+function createTask(input: CreateTaskInput): Task {
+    const id = Math.random().toString(36).substring(2);
     return {
-        input,
-        id: orcrandomID(),
-        createdat: new Date(),
+        ...input,
+        id: Math.random().toString(36).substring(2),
+        createdAt: new Date(),
     };
 }
 
