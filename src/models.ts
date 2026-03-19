@@ -1,13 +1,14 @@
 export type TaskId = string;
+// TaskId es simplemente un alias — string con otro nombre más descriptivo
 
 export interface Task {
-  id: TaskId;
-  title: string;
-  description?: string;
-  priority: "low" | "medium" | "high";
-  completed: boolean;
-  createdAt: Date;
-  completedAt?: Date;
+  id: TaskId;          // obligatorio
+  title: string;       // obligatorio
+  description?: string; // opcional (el ? significa "puede no existir")
+  priority: "low" | "medium" | "high"; // solo estos tres valores son válidos
+  completed: boolean;  // obligatorio
+  createdAt: Date;     // obligatorio
+  completedAt?: Date;  // opcional
 }
 
 export interface User {
@@ -22,7 +23,8 @@ export interface Category {
   color: string;
 }
 
-// Alias interesante
+// CreateTaskInput = Task pero sin id, createdAt ni completedAt
+// porque esos los genera el sistema, no el usuario
 export type CreateTaskInput = Omit<
   Task,
   "id" | "createdAt" | "completedAt"
