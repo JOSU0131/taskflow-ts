@@ -48,3 +48,20 @@ const objetoInvalido: unknown = { nombre: "Orco", nivel: 5 };
 
 console.log("¿Es una Task?", isTask(objetoDesconocido)); // true
 console.log("¿Es una Task?", isTask(objetoInvalido));    // false
+
+
+//── PROBAR Partial, Pick, Omit, Record ───────────────────────────────────────────
+
+import { updateTask, getTaskSummary, countByPriority } from "./utilities";
+
+// ── PROBAR Partial — actualizar solo algunos campos ───────────────────────────
+const tareaActualizada = updateTask(tarea1, { title: "Pintar Orco Warboss TERMINADO", completed: true });
+console.log("Tarea actualizada:", tareaActualizada.title, "→ completada:", tareaActualizada.completed);
+
+// ── PROBAR Pick — vista resumida de una tarea ─────────────────────────────────
+const resumen = getTaskSummary(tarea2);
+console.log("Resumen:", resumen); // solo id y title
+
+// ── PROBAR Record — contar tareas por prioridad ───────────────────────────────
+const conteo = countByPriority(tareas);
+console.log("Conteo por prioridad:", conteo);
