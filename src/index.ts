@@ -1,22 +1,29 @@
-import type { Task } from "./models";
+import type { Task, CreateTaskInput } from "./models";
+import { createTask, toggleTask, filterByPriority, getStats } from "./task-service";
 
-// Objeto CORRECTO
-const tareaCorrecta: Task = {
-    id: "1",
-    title: "Aprender TypeScript",
-    priority: "high",
-    completed: false,
-    createdAt: new Date()
-};
+// ── CREAR TAREAS DE EJEMPLO ───────────────────────────────────────────────────
 
-// Objeto con ERROR A PROPÓSITO
-const tareaConError: Task = {
-    id: "2",
-    title: "Tarea con error",
-     // priority: "urgente",  // ❌ MALO: "urgente" no es un valor válido para priority
-    priority: "high",  // ✅ BUENO: "high" es un valor válido para priority
-    completed: false,
-    createdAt: new Date()
-};
+const tarea1 = createTask("Pintar Orco Warboss", "high");
+const tarea2 = createTask("Organizar el taller", "medium");
+const tarea3 = createTask("Hacer ejercicio", "low");
+const tarea4 = createTask("Leer documentación TS", "high");
+
+const tareas: Task[] = [tarea1, tarea2, tarea3, tarea4];
+
+// ── COMPLETAR UNA TAREA ───────────────────────────────────────────────────────
+// toggleTask invierte el estado — de false a true
+
+const tarea1Completada = toggleTask(tarea1);
+console.log("Tarea completada:", tarea1Completada.title, "→", tarea1Completada.completed);
+
+// ── FILTRAR POR PRIORIDAD ─────────────────────────────────────────────────────
+
+const tareasAltas = filterByPriority(tareas, "high");
+console.log("Tareas de alta prioridad:", tareasAltas.map(t => t.title));
+
+// ── ESTADÍSTICAS ──────────────────────────────────────────────────────────────
+
+const stats = getStats(tareas);
+console.log("Estadísticas:", stats);
 
 console.log("Hello Random Ork on TypeScript!");
